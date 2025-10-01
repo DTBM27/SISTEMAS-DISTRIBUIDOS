@@ -1,5 +1,3 @@
-// Arquivo: Cliente.java
-
 import java.rmi.Naming;
 import java.util.Scanner;
 
@@ -7,9 +5,8 @@ public class Cliente {
 
     public static void main(String[] args) {
         try {
-            // Procura pelo objeto remoto no servidor
-            // IMPORTANTE: Se o servidor estiver em outra máquina, troque "localhost" pelo IP do servidor.
-            ControleRemoto controle = (ControleRemoto) Naming.lookup("//localhost/ControleRemotoService");
+            
+            ControleRemoto controle = (ControleRemoto) Naming.lookup("//172.20.10.2/ControleRemotoService");
 
             Scanner scanner = new Scanner(System.in);
             int escolha = -1;
@@ -17,7 +14,6 @@ public class Cliente {
             System.out.println("Cliente conectado ao servidor de Controle Remoto!");
 
             while (escolha != 0) {
-                // Exibe o menu de opções
                 System.out.println("\n--- MENU DO CONTROLE REMOTO ---");
                 System.out.println("1. Ligar a TV");
                 System.out.println("2. Desligar a TV");
@@ -63,22 +59,20 @@ public class Cliente {
                             System.out.println("Comando [MUDO] enviado.");
                             break;
                         case 8:
-                            // Não faz nada aqui, pois o status será exibido após o switch
                             break;
                         case 0:
                             System.out.println("Saindo... Obrigado por usar o controle remoto RMI!");
-                            continue; // Pula a exibição do status final
+                            continue;
                         default:
                             System.out.println("Opção inválida. Tente novamente.");
                             continue;
                     }
 
-                    // Após cada ação, exibe o status atual da TV
                     System.out.println("\n" + controle.obterStatus());
 
                 } catch (java.util.InputMismatchException e) {
                     System.out.println("Entrada inválida. Por favor, digite um número.");
-                    scanner.next(); // Limpa o buffer do scanner
+                    scanner.next();
                 }
             }
             scanner.close();

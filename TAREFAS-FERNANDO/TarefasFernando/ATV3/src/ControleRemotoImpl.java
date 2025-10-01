@@ -1,26 +1,16 @@
-// Arquivo: ControleRemotoImpl.java
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-/**
- * A implementação concreta da interface ControleRemoto.
- * Esta classe mantém o estado da TV e executa as ações.
- * Estende UnicastRemoteObject para ser um objeto remoto exportável.
- */
 public class ControleRemotoImpl extends UnicastRemoteObject implements ControleRemoto {
 
-    // Atributos que representam o estado da "TV"
     private boolean ligada;
     private int volume;
     private int canal;
     private boolean mudo;
     private int volumeAntesDoMudo;
 
-    // Construtor
     public ControleRemotoImpl() throws RemoteException {
-        super(); // Chama o construtor da superclasse UnicastRemoteObject
-        // Estado inicial da TV
+        super(); 
         this.ligada = false;
         this.volume = 10;
         this.canal = 5;
@@ -45,7 +35,7 @@ public class ControleRemotoImpl extends UnicastRemoteObject implements ControleR
         if (ligada && volume < 100) {
             this.volume++;
             if(this.mudo) {
-                alternarMudo(); // Se estava mudo, sai do modo mudo ao aumentar o volume
+                alternarMudo(); 
             }
         }
     }
